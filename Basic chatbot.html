@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple AI Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #chatbox { width: 300px; height: 400px; border: 1px solid #ccc; padding: 10px; overflow-y: scroll; }
+        #userInput { width: 300px; }
+    </style>
+</head>
+<body>
+    <h1>Simple AI Chatbot</h1>
+    <div id="chatbox"></div>
+    <input type="text" id="userInput" placeholder="Type a message..." onkeydown="if(event.key === 'Enter') sendMessage()">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        const responses = {
+            "hello": "Hi there!",
+            "how are you": "I'm just a bot, but I'm doing fine!",
+            "what is your name": "I'm a simple AI chatbot.",
+            "bye": "Goodbye!"
+        };
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput').value.toLowerCase();
+            document.getElementById('userInput').value = '';
+            addMessage('You: ' + userInput);
+            setTimeout(() => {
+                const response = responses[userInput] || "I don't understand that.";
+                addMessage('Kais Bot: ' + response);
+            }, 500);
+        }
+
+        function addMessage(message) {
+            const chatbox = document.getElementById('chatbox');
+            const messageElement = document.createElement('div');
+            messageElement.textContent = message;
+            chatbox.appendChild(messageElement);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
